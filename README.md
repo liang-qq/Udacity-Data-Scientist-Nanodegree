@@ -15,6 +15,10 @@ help walking through the thought process.
 
 The main findings of the code can be found at the post available [here](https://medium.com/@mitbbskg/explotary-data-analysis-to-airbnb-listing-in-seattle-8c0bffd96237).
 
+**Technical Requirements**
+
+The coding is written in Jupyter Notebook. Please be sure the libraries of Pandas, Numpy and Matplotlib are installed before running the code.
+
 **Licensing, Authors, Acknowledgements, etc.**
 
 Must give credit to Airbnbfor the data. You can find the Licensing for the data and other descriptive information at the Kaggle link 
