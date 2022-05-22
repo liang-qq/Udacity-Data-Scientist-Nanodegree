@@ -15,6 +15,15 @@ from sqlalchemy import create_engine
 app = Flask(__name__)
 
 def tokenize(text):
+    """
+    NLP Process: tokenize and lemmatize texts.
+
+    Args:
+    text: string. Raw text for NLP processing.
+
+    Returns:
+    tokens: strings. Processed text after tokenize and lemmatize.
+    """
     tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
 
@@ -40,8 +49,10 @@ def index():
     
     # extract data needed for visuals
     # TODO: Below is an example - modify to extract data for your own visuals
-    genre_counts = df.groupby('genre').count()['message']
-    genre_names = list(genre_counts.index)
+    genre_related_counts = df[df['related']==0].groupby('genre').count()['message']
+    genre_unrelated_counts = df[df['related']==1].groupby('genre').count()['message']
+    genre_names1 = list(genre_related_counts.index)
+    genre_names2 = list(genre_unrelated_counts.index)
     
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
@@ -49,9 +60,15 @@ def index():
         {
             'data': [
                 Bar(
-                    x=genre_names,
-                    y=genre_counts
-                )
+                    x=genre_names1,
+                    y=genre_related_counts,
+                    name='Genre Related'
+                ),
+                Bar(
+                    x=genre_names2,
+                    y=genre_unrelated_counts,
+                    name='Genre Unrelated'
+                ),
             ],
 
             'layout': {
