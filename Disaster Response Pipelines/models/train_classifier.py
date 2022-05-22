@@ -20,6 +20,17 @@ from sklearn.metrics import classification_report
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 
 def load_data(database_filepath):
+    """
+    load data from the sql database into a dataframe
+
+    Args:
+    database_filepath: string. File path for the sql database.
+
+    Returns:
+    X: datafame. Dataframe for features which will be used for the model.
+    Y: datafame. Dataframe for labels which will be used for the model.
+    category_names: string list. List that contains column names of the labels dataframe (Y).
+    """
     # load data from database
     engine = create_engine('sqlite:///' + database_filepath)
     df = pd.read_sql_table("DisasterResponse", engine)
@@ -32,6 +43,15 @@ def load_data(database_filepath):
 
 
 def tokenize(text):
+    """
+    NLP Process: tokenize and lemmatize texts.
+
+    Args:
+    text: string. Raw text for NLP processing.
+
+    Returns:
+    tokens: strings. Processed text after tokenize and lemmatize.
+    """
     #Write a tokenization function to process your text data
     # Todo: normalize case and remove punctuation
     text = re.sub(r"[^a-zA-Z0-9]", " ", text.lower())
@@ -46,6 +66,15 @@ def tokenize(text):
 
 
 def build_model():
+    """
+    build a machine learning model.
+
+    Args:
+    None.
+
+    Returns:
+    cv: grid search cv object that is used for tuning machine learning model parameters.
+    """
     #use the best parameters to retest the pipeline
     pipeline = Pipeline([
                 ('vect', CountVectorizer(tokenizer=tokenize)),
@@ -65,10 +94,32 @@ def build_model():
 
 #define a function to evaluate accuracy using sklearn.classification_report package
 def accuracy_score(Y_pred,Y_test):
+    """
+    evalution metrics for the machine learning model performance
+
+    Args:
+    Y_pred: strings. Predicted labels of the test dataset from the machine learning model.
+    Y_test: strings. Real labels for the test dataset.
+
+    Returns:
+    None
+    """
     for i, col in enumerate(Y_test):
         print(col, '\t', classification_report(Y_test[col], Y_pred[:, i]))
 
 def evaluate_model(model, X_test, Y_test, category_names):
+    """
+    evalute the machine learning model performance
+
+    Args:
+    model: object. A developed machine learning model.
+    X_test: strings. Features for the test dataset.
+    Y_test: strings. Real labels for the test dataset.
+    category_names: string list. List that contains column names of the labels dataframe (Y).
+
+    Returns:
+    None
+    """
     #make a prediction
     Y_pred = model.predict(X_test)
     #evaluate model accuracy
@@ -77,6 +128,15 @@ def evaluate_model(model, X_test, Y_test, category_names):
 
 
 def save_model(model, model_filepath):
+    """Pickle fitted model
+    
+    Args:
+    model: object. A developed machine learning model.
+    model_filepath: string. Filepath for where the developed machine learning model is saved
+    
+    Returns:
+    None
+    """
     # Pickle best model
     pickle.dump(model, open(model_filepath, 'wb'))
 
