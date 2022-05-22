@@ -5,6 +5,16 @@ from sqlalchemy import create_engine
 
 
 def load_data(messages_filepath, categories_filepath):
+    """
+    load messages and categories datasets and merge into one dataframe
+
+    Args:
+    messages_filepath: string. File path for messages source dataset.
+    categories_filepath: string. File path for messages source dataset.
+
+    Returns:
+    df: dataframe. Dataframes that combined messages and categories datasets.
+    """
     # load messages dataset
     messages = pd.read_csv(messages_filepath)
     # load categories dataset
@@ -16,6 +26,15 @@ def load_data(messages_filepath, categories_filepath):
     return df
 
 def clean_data(df):
+    """
+    data cleanning and data wrangling of the dataframe.
+
+    Args:
+    df: dataframe. Dataframes that combined messages and categories datasets.
+
+    Returns:
+    df: dataframe. Dataframes after data cleaning and pre-processing.
+    """
     #Split categories into separate category columns
     # create a dataframe of the 36 individual category columns
     categories = df['categories'].str.split(';', expand=True)
@@ -40,7 +59,10 @@ def clean_data(df):
     df = df.drop(columns=['categories'])
     # concatenate the original dataframe with the new `categories` dataframe
     df = pd.concat([df, categories], axis=1)
-    
+
+    # Remove rows with a related value of 2
+    df = df[df['related'] != 2]
+
     # drop duplicates
     df = df.drop_duplicates()
     # check number of duplicates
@@ -48,8 +70,18 @@ def clean_data(df):
     return df
 
 def save_data(df, database_filename):
+    """
+    save the dataframe into a sql database.
+
+    Args:
+    df: dataframe. Dataframes after data cleaning and pre-processing.
+    database_filename: string. Filename for saved sql database.
+
+    Returns:
+    None
+    """
     engine = create_engine('sqlite:///' + database_filename) 
-    df.to_sql('DisasterResponse', engine, index=False)
+    df.to_sql('DisasterResponse', engine, index=False, if_exists='replace')
 
 
 def main():
