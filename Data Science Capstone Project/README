@@ -1,8 +1,9 @@
 **Project Motivation**
 
-This is an Udacity Data Science Nanodegree course project: Starbucks Capstone Project. In this project the basic task is to use the data to identify 
-which groups of people are most responsive to each type of offer, and how best to present each type of offer. Our goal is to combine transaction, 
-demographic and offer data to predict whether a customer will take the promotions, or ignore the offer.
+This is an Udacity Data Science Nanodegree course project: Starbucks Capstone Project. In this project the basic 
+task is to use the data to identify which groups of people are most responsive to each type of offer, and how best 
+to present each type of offer. Our goal is to combine transaction, demographic and offer data to predict whether 
+a customer will take the promotions, or ignore the offer.
 
 **File Descriptions**
 
@@ -87,8 +88,8 @@ produces a more accurate model in predicting the customer behaviors.
 
 **Technical Requirements**
 
-The coding is written in Jupyter Notebook. Please be sure the libraries of Pandas, Numpy, json, math, matplotlib, seaborn, and sklearn are 
-installed before running the code.
+The coding is written in Jupyter Notebook. Please be sure the libraries of Pandas, Numpy, json, math, matplotlib, seaborn, 
+and sklearn are installed before running the code.
 
 
 **Licensing, Authors, Acknowledgements, etc.**
