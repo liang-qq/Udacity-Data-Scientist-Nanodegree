@@ -1,3 +1,13 @@
+
+**Table of Contents**
+
+- Project Motivation
+- File Descriptions
+- Running Instruction
+- Results
+- Technical Requirements
+- Licensing, Authors, Acknowledgements, etc.
+
 **Project Motivation**
 
 This is an Udacity Data Science Nanodegree course project: Starbucks Capstone Project. In this project the basic 
@@ -7,7 +17,7 @@ a customer will take the promotions, or ignore the offer.
 
 **File Descriptions**
 
-2.a Source Data
+a. Source Data
 
 Three datasets were provided to us:
 
@@ -44,7 +54,7 @@ amount: (numeric) money spent in “transaction”
 reward: (numeric) money gained from “offer completed”
 time: (numeric) hours after start of test
 
-4. working file
+b. working file
 Starbucks _capstone_notebook.ipynb
 
 5.README.md : contain every detail about the project.
@@ -53,7 +63,10 @@ Starbucks _capstone_notebook.ipynb
 
 Run the ipynb either in the Jupyternotebook platform, or any IDE you prefer.
 
-Results
+**Results**
+
+The main findings of the code can be found at the post available [here]
+(https://medium.com/@mitbbskg/udacity-starbucks-capstone-challenge-19ea0201ea0).
 
 Upon receiving the data, I started to get a general idea of the dataset: portfolio, profile and transaction. 
 Then I began the data cleaning process by dealing with missing values, outlier and nested list/dictionary format
