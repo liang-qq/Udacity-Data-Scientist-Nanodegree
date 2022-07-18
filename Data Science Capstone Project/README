@@ -1,0 +1,96 @@
+**Project Motivation**
+
+This is an Udacity Data Science Nanodegree course project: Starbucks Capstone Project. In this project the basic task is to use the data to identify 
+which groups of people are most responsive to each type of offer, and how best to present each type of offer. Our goal is to combine transaction, 
+demographic and offer data to predict whether a customer will take the promotions, or ignore the offer.
+
+**File Descriptions**
+
+2.a Source Data
+
+Three datasets were provided to us:
+
+1. portfolio data
+
+Offers sent during 30-day test period (10 offers x 6 fields)
+
+reward: (numeric) money awarded for the amount spent
+channels: (list) web, email, mobile, social
+difficulty: (numeric) money required to be spent to receive reward
+duration: (numeric) time for offer to be open, in days
+offer_type: (string) bogo, discount, informational
+id: (string/hash)
+
+2. profile data
+
+Rewards program users (17000 users x 5 fields)
+
+gender: (categorical) M, F, O, or null
+age: (numeric) missing value encoded as 118
+id: (string/hash)
+became_member_on: (date) format YYYYMMDD
+income: (numeric)
+
+3. transcript data
+
+Event log (306648 events x 4 fields)
+
+person: (string/hash)
+event: (string) offer received, offer viewed, transaction, offer completed
+value: (dictionary) different values depending on event type
+offer id: (string/hash) not associated with any “transaction”
+amount: (numeric) money spent in “transaction”
+reward: (numeric) money gained from “offer completed”
+time: (numeric) hours after start of test
+
+4. working file
+Starbucks _capstone_notebook.ipynb
+
+5.README.md : contain every detail about the project.
+
+**Running Instruction**
+
+Run the ipynb either in the Jupyternotebook platform, or any IDE you prefer.
+
+Results
+
+Upon receiving the data, I started to get a general idea of the dataset: portfolio, profile and transaction. 
+Then I began the data cleaning process by dealing with missing values, outlier and nested list/dictionary format
+elements in the column. The most difficult part in the cleaning phase is to identify the successful or unsuccessful 
+offers and calculated associated transaction amount. In this part a special case scenario of customers continuing 
+to make transactions without knowing the existence of the promotional offer is removed from the data set since it 
+does not contribute to the impact analysis of the offers.
+
+The exploratory data analysis provides some insights to the offer types and customer demographics:
+
+- offer id: fafdcd668e3743c1bb461111dcafc2a4 (BOGO offer) is the most taken offer in both male and female customers 
+with no gender preference. However female customers took more offers than males in the second most taken 
+offer: 2298d6c36e964ae4a3e7e9706d1fb8c2 (Discount offer).
+
+- Among three offer types (informational, BOGO, and Discount), Discount offer is the most popular offer which makes sense 
+that most customers prefer to get the price reduction on the single item rather than spending more to get a discount.
+
+- The EDA also shows an interesting fact that customers more than 50 year old spend more on Starbucks in which 
+more female customers than males.
+
+- Follow up with the third observation that female customers tend to have a higher income level than male customers, 
+with less low income group(<40K) and more high income group(>100K).
+
+With those insights, I started building the machine learning model to predict if a customer will take the offer or fail 
+the offer based on offer type and demographic information. I tested with two models: K-Nearest Neighbors and Random Forest
+model, both are classification models. I applied the GridSearch function to tune hyperparameters to both models which 
+helped improve the model performance.
+
+The metrics show that the K-Nearest Neighbors Classification model provides a 69% accuracy and a 74% f1 score, and 
+the Random Forest model gives a 84% accuracy and a 86% f1 score. The Random Forest model, which is an ensemble model, 
+produces a more accurate model in predicting the customer behaviors.
+
+**Technical Requirements**
+
+The coding is written in Jupyter Notebook. Please be sure the libraries of Pandas, Numpy, json, math, matplotlib, seaborn, and sklearn are 
+installed before running the code.
+
+
+**Licensing, Authors, Acknowledgements, etc.**
+
+Data was provided from Udacity in partnership with Starbucks.
